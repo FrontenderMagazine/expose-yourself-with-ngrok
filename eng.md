@@ -1,4 +1,4 @@
-*By [Raymond Camden][1]*
+# Expose yourself with ngrok
 
 One of the more common tasks we have in web development involves the need to
 share our web application with other developers and APIs. For a production web 
@@ -18,18 +18,19 @@ Enter [ngrok][2], a simple service that lets you expose a local web service (of
 any sort,: Node.js, ColdFusion, PHP, etc) to the internet. Not only does it let 
 you expose services, it lets you examine the requests coming in as well as 
 replaying them (This by itself could be crucial. If you are testing a service 
-with rate limits, you could ask ngrok to rerun a request without using the*real
-* remote service).
+with rate limits, you could ask ngrok to rerun a request without using the *real*
+remote service).
 
 ngrok is 100% free, but with additional services provided for people who
 register as well as those who donate money. You don’t even have to donate a 
-specific amount – just something. All in all, I think this is an*incredibly*
+specific amount – just something. All in all, I think this is an *incredibly*
 generous model and something they should be applauded for.
+
 
 ## Installation and Running
 
 Bucking the status quo, this is one of the few tools I’ve installed lately
-that does*not* required npm. Crazy, right? Instead, you’ll simply download a
+that does *not* required npm. Crazy, right? Instead, you’ll simply download a
 zip (for Windows, Mac, and Linux), extract, and place the binary in your path. 
 Once you’ve done that, fire up your service (again, ngrok isn’t going to care 
 what server-side technology you’re using, so feel free to fire up those Perl 
@@ -59,26 +60,27 @@ report on your requests.
 
 All in all, ngrok is very powerful out of the box.
 
+
 ## A Real World Example
 
-Now let’s test with a real example. I mentioned GitHub webhooks earlier, let
-’s take a look at that. I selected one of my repos by random
+Now let’s test with a real example. I mentioned GitHub webhooks earlier, let’s
+take a look at that. I selected one of my repos by random
 (<https://GitHub.com/cfjedimaster/BehanceAPI>), went into Settings, Webhooks &
-Services, and clicked`Add webhook`.
+Services, and clicked `Add webhook`.
 
-For my URL, I’m going to use a simple ColdFusion script on my local server. I
-’m not going to do anything fancy with it at all now, but I’ll just ensure it 
-exists. I created a file,`helloGitHub.cfm`, and place it in a testing folder I
-’ve got on my local Apache web server.
+For my URL, I’m going to use a simple ColdFusion script on my local server. I’m
+not going to do anything fancy with it at all now, but I’ll just ensure it 
+exists. I created a file `helloGitHub.cfm` and place it in a testing folder I’ve
+got on my local Apache web server.
 
 ![shot5][7]
 
 Note – I selected `Send me everything` as an option so that it would be easier
 to test. GitHub lets you run the webhook only on pushes or individual events as 
-well. Click`Add webhook` to complete the process.
+well. Click `Add webhook` to complete the process.
 
 Ok, now what? At this point I know GitHub is going to run the URL when stuff
-happens. But I’ve got no idea*what* GitHub is going to send. I’m sure it will
+happens. But I’ve got no idea *what* GitHub is going to send. I’m sure it will
 send me lots of cool data and I’m sure I could find the docs to see what that is
 – but why bother reading the docs when we can test right now with ngrok.
 
@@ -93,8 +95,8 @@ the event.
 As you can see, you get a summary view, a headers view, as well as raw and
 binary. Notice that the data is shown as is – without formatting of the JSON 
 packet. ngrok actually supports formatting JSON but only when the content type 
-is`application/json`. Since GitHub isn’t using that content type, ngrok doesn
-’t recognize it as JSON.
+is `application/json`. Since GitHub isn’t using that content type, ngrok doesn’t
+recognize it as JSON.
 
 At this point, I could start testing. I’d edit my server-side code to handle
 the webhook and do something intelligent. In order to test though I’d need to 
@@ -104,6 +106,7 @@ first bug with ngrok. While I was able to rerun the initial hit GitHub sent to
 me when I registered the webhook, I was not able to rerun the one created when I
 added an issue to my project. I’ve filed a bug report on this
 ([link][9]) and I’m sure it will be resolved soon.
+
 
 ## Additional Features
 
@@ -115,19 +118,17 @@ protection, and multiple tunnels.
 
 Registering is painless, and when you do, you will get an auth token. You
 simply supply that auth token at the command line to make use of one of the 
-reserved features. So for example, to create a custom subdomain, I’d do this (
-auth token changed of course
-):
+reserved features. So for example, to create a custom subdomain, I’d do this
+(auth token changed of course):
 
     ngrok -authtoken Ythisisrandomsecretcrap2 -subdomain mymilkshakeisbetterthanyours 80
     
-
 The next level requires you to actually pay them, but again, what you pay is
 totally up to you. That level gets you additional tunnling support as well as 
 the ability to reserve subdomains (but, to be honest, if you are at a point 
 where you feel the need to reserve a subdomain, I think you may want to use a 
-real web server -obviously folks may disagree on that
-).
+real web server -obviously folks may disagree on that).
+
 
 ## Conclusion
 
